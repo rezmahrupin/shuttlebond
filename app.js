@@ -35,36 +35,116 @@ const CONFIG = {
       icon: "shuttle"
     },
     {
-      id: "racket-allround",
-      name: "All-round racket",
+      id: "racket-carlton-yellow",
+      name: "Carlton — Yellow/Black",
       category: "Rackets",
-      spec: "Even balance, 3U, strung on request",
-      price: 89,
-      icon: "racket"
+      spec: "Even balance, 3U, medium flex, 85±2g, 675mm",
+      price: 79,
+      image: "images/racket-carlton-yellow.png"
     },
     {
-      id: "racket-attack",
-      name: "Attack racket",
+      id: "racket-carlton-lavender",
+      name: "Carlton — Lavender",
       category: "Rackets",
-      spec: "Head-heavy, 3U, for power hitters",
-      price: 119,
-      icon: "racket"
+      spec: "Lightweight aero frame, all-round play",
+      price: 69,
+      image: "images/racket-carlton-lavender.png"
     },
     {
-      id: "grip-overgrip",
-      name: "Overgrip — pack of 3",
-      category: "Grips & string",
-      spec: "Tacky dry-feel, assorted colours",
-      price: 12,
-      icon: "grip"
+      id: "racket-carlton-graphite",
+      name: "Carlton — Graphite/Yellow",
+      category: "Rackets",
+      spec: "Full graphite aero head, fast swing",
+      price: 75,
+      image: "images/racket-carlton-graphite.png"
     },
     {
-      id: "string-set",
-      name: "Racket string, per set",
+      id: "racket-white-blue",
+      name: "All-round racket — White/Blue",
+      category: "Rackets",
+      spec: "Balanced frame, control-focused",
+      price: 65,
+      image: "images/racket-white-blue.png"
+    },
+    {
+      id: "racket-maroon",
+      name: "Attack racket — Maroon",
+      category: "Rackets",
+      spec: "Head-light, built for fast net play",
+      price: 59,
+      image: "images/racket-maroon-grip.png"
+    },
+    {
+      id: "racket-yonex-astrox",
+      name: "Yonex Astrox + racket bag",
+      category: "Rackets",
+      spec: "Includes padded cover bag",
+      price: 189,
+      image: "images/racket-yonex-astrox.png"
+    },
+    {
+      id: "racket-lining-halbertec9000",
+      name: "Li-Ning Halbertec 9000 Power",
+      category: "Rackets",
+      spec: "Head-heavy power frame",
+      price: 249,
+      image: "images/racket-lining-halbertec9000.png"
+    },
+    {
+      id: "string-yonex-exbolt63",
+      name: "Yonex Exbolt 63",
       category: "Grips & string",
-      spec: "0.66mm, strung same day",
+      spec: "0.63mm, quick repulsion — per set, strung on request",
+      price: 22,
+      image: "images/string-yonex-exbolt63.png"
+    },
+    {
+      id: "string-yonex-aerobite-boost",
+      name: "Yonex Aerobite Boost",
+      category: "Grips & string",
+      spec: "Hybrid control string — per set, strung on request",
+      price: 25,
+      image: "images/string-yonex-aerobite-boost.png"
+    },
+    {
+      id: "string-yonex-nanogy95",
+      name: "Yonex Nanogy 95",
+      category: "Grips & string",
+      spec: "0.65mm, durable, medium feel — per set",
+      price: 20,
+      image: "images/string-yonex-nanogy95.png"
+    },
+    {
+      id: "grip-yonex-towel",
+      name: "Yonex Towel Grip",
+      category: "Grips & string",
+      spec: "100% cotton, sweat absorption",
+      price: 8,
+      image: "images/grip-yonex-towel.png"
+    },
+    {
+      id: "grip-yonex-yellow",
+      name: "Yonex Replacement Grip",
+      category: "Grips & string",
+      spec: "Cushioned, spiral wrap, yellow",
+      price: 10,
+      image: "images/grip-yonex-yellow-spiral.png"
+    },
+    {
+      id: "grip-yonex-supergrip",
+      name: "Yonex Super Grip",
+      category: "Grips & string",
+      spec: "Synthetic overgrip, pack of 3",
+      price: 9,
+      image: "images/grip-yonex-supergrip-orange.png"
+    },
+    {
+      id: "grip-yonex-overgrip-multi",
+      name: "Yonex Overgrip — assorted",
+      category: "Grips & string",
+      spec: "Pack of 5, assorted colours",
       price: 15,
-      icon: "string"
+      image: "images/grip-yonex-overgrip-multicolor.png"
     }
   ]
 };
@@ -103,9 +183,12 @@ function renderProducts() {
   const items = CONFIG.products.filter(p => activeFilter === "All" || p.category === activeFilter);
   grid.innerHTML = items.map(p => {
     const qty = cart[p.id] || 0;
+    const media = p.image
+      ? `<div class="product-photo"><img src="${p.image}" alt="${p.name}" loading="lazy"></div>`
+      : `<div class="product-icon">${icons[p.icon] || ""}</div>`;
     return `
     <div class="product-card">
-      <div class="product-icon">${icons[p.icon] || ""}</div>
+      ${media}
       <h3>${p.name}</h3>
       <p class="product-spec">${p.spec}</p>
       <div class="product-footer">
