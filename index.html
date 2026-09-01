@@ -1,189 +1,379 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shuttlebond — Badminton gear, Perth</title>
-<meta name="description" content="Rackets, shuttlecocks, grips and string. Order online, pay by PayID or cash on pickup.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Public+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+:root {
+  --court-green: #C6FF33;
+  --court-green-line: #C6FF33;
+  --bg: #0B0D0A;
+  --panel: #14170F;
+  --cork: #C6FF33;
+  --charcoal: #F2F3EE;
+  --ink-soft: #9AA294;
+  --accent: #C6FF33;
+  --line: #262A21;
 
-<header class="site-header">
-  <div class="wrap header-inner">
-    <a href="#top" class="logo">
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-        <path d="M14 3 L20 15 L14 25 L8 15 Z" stroke="currentColor" stroke-width="1.4" fill="none"/>
-        <circle cx="14" cy="3" r="2.3" fill="currentColor"/>
-      </svg>
-      Shuttlebond
-    </a>
-    <nav class="main-nav">
-      <a href="#shop">Shop</a>
-      <a href="#how">How to order</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <button class="cart-btn" id="cartToggle" aria-haspopup="dialog" aria-controls="cartDrawer">
-      Order
-      <span class="cart-count" id="cartCount">0</span>
-    </button>
-  </div>
-</header>
+  --font-display: 'Anton', sans-serif;
+  --font-body: 'Public Sans', sans-serif;
+  --font-mono: 'Space Mono', monospace;
 
-<main id="top">
+  --radius: 2px;
+}
 
-  <section class="hero">
-    <div class="wrap hero-inner">
-      <div class="hero-copy">
-        <p class="kicker">Based in Perth, WA · local pickup or delivery</p>
-        <h1>Strung right.<br>Served fast.</h1>
-        <p class="lede">Rackets, shuttlecocks, grips and string for weeknight hitters and club players. Build your order below, then pay by PayID or cash — no accounts, no checkout maze.</p>
-        <div class="hero-actions">
-          <a href="#shop" class="btn btn-primary">Shop the range</a>
-          <a href="#how" class="btn btn-ghost">How ordering works</a>
-        </div>
-      </div>
-      <div class="hero-art" aria-hidden="true">
-        <svg viewBox="0 0 360 360" width="100%" height="100%">
-          <line x1="20" y1="20" x2="340" y2="340" stroke="#2E5C3F" stroke-width="1" opacity="0.35"/>
-          <line x1="20" y1="180" x2="340" y2="180" stroke="#2E5C3F" stroke-width="1" opacity="0.35"/>
-          <line x1="180" y1="20" x2="180" y2="340" stroke="#2E5C3F" stroke-width="1" opacity="0.35"/>
-          <rect x="20" y="20" width="320" height="320" fill="none" stroke="#2E5C3F" stroke-width="1.4"/>
-          <!-- shuttlecock -->
-          <g transform="translate(160,120) rotate(18)">
-            <circle cx="0" cy="0" r="13" fill="#C89B6B"/>
-            <path d="M -11 -4 L -34 -54 M -4 -10 L -14 -60 M 4 -10 L 14 -60 M 11 -4 L 34 -54" stroke="#F7F5EF" stroke-width="2.2" stroke-linecap="round"/>
-            <path d="M -34 -54 Q 0 -74 34 -54" stroke="#F7F5EF" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-          </g>
-          <path d="M160,120 Q 90,220 60,300" stroke="#C1440E" stroke-width="1.6" fill="none" stroke-dasharray="2 7" opacity="0.7"/>
-        </svg>
-      </div>
-    </div>
-  </section>
+* { box-sizing: border-box; }
 
-  <section class="trust-strip">
-    <div class="wrap trust-inner">
-      <div class="trust-item">
-        <span class="trust-num">01</span>
-        <p>Pickup around Perth, or local delivery by arrangement</p>
-      </div>
-      <div class="trust-item">
-        <span class="trust-num">02</span>
-        <p>Pay by PayID transfer, or cash when you collect</p>
-      </div>
-      <div class="trust-item">
-        <span class="trust-num">03</span>
-        <p>Feather and nylon shuttles, strung to your tension</p>
-      </div>
-    </div>
-  </section>
+html { scroll-behavior: smooth; }
 
-  <section class="shop" id="shop">
-    <div class="wrap">
-      <div class="shop-head">
-        <h2>Shop</h2>
-        <div class="filters" id="filters" role="tablist" aria-label="Filter products by category"></div>
-      </div>
-      <div class="product-grid" id="productGrid"></div>
-    </div>
-  </section>
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--charcoal);
+  font-family: var(--font-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
 
-  <section class="how" id="how">
-    <div class="wrap">
-      <h2>How ordering works</h2>
-      <ol class="steps">
-        <li>
-          <span class="step-num">1</span>
-          <div>
-            <h3>Add items to your order</h3>
-            <p>Pick quantities in the shop above. Your order list updates on the right.</p>
-          </div>
-        </li>
-        <li>
-          <span class="step-num">2</span>
-          <div>
-            <h3>Choose PayID or cash</h3>
-            <p>Send the order message with your chosen payment method — PayID details are shown at checkout, or pay cash when you pick up.</p>
-          </div>
-        </li>
-        <li>
-          <span class="step-num">3</span>
-          <div>
-            <h3>We confirm pickup or delivery</h3>
-            <p>We'll reply to arrange a time and place. Feather shuttles are made up fresh, so allow a day or two for larger orders.</p>
-          </div>
-        </li>
-      </ol>
-    </div>
-  </section>
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  margin: 0 0 0.4em;
+  color: var(--charcoal);
+}
 
-  <section class="contact" id="contact">
-    <div class="wrap contact-inner">
-      <div>
-        <h2>Contact</h2>
-        <p>Questions about stock, stringing tension, or bulk orders for a club — reach out directly.</p>
-        <dl class="contact-list">
-          <div><dt>Phone / SMS</dt><dd id="contactPhone">0400 000 000</dd></div>
-          <div><dt>Email</dt><dd id="contactEmail">orders@shuttlebond.com.au</dd></div>
-          <div><dt>Area</dt><dd>Perth, WA</dd></div>
-        </dl>
-      </div>
-      <div class="payid-card">
-        <p class="kicker">PayID</p>
-        <p class="payid-value" id="payidDisplay">0400 000 000</p>
-        <p class="payid-note">Use the order total as the payment description so we can match it quickly.</p>
-      </div>
-    </div>
-  </section>
+h1 { font-size: clamp(2.6rem, 7vw, 4.6rem); }
+h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); }
+h3 { font-size: 1.05rem; text-transform: none; font-family: var(--font-body); font-weight: 700; color: var(--charcoal); }
 
-</main>
+.accent { color: var(--court-green); }
 
-<footer class="site-footer">
-  <div class="wrap footer-inner">
-    <p>Shuttlebond — Perth, WA. Payment by PayID or cash only.</p>
-    <p class="footer-edit-note">Edit shop details in <code>app.js</code> → CONFIG.</p>
-  </div>
-</footer>
+p { margin: 0 0 1em; color: var(--ink-soft); max-width: 62ch; }
 
-<!-- Cart drawer -->
-<div class="drawer-backdrop" id="drawerBackdrop"></div>
-<aside class="drawer" id="cartDrawer" role="dialog" aria-label="Your order" aria-hidden="true">
-  <div class="drawer-head">
-    <h2>Your order</h2>
-    <button class="drawer-close" id="drawerClose" aria-label="Close order panel">✕</button>
-  </div>
+a { color: inherit; }
 
-  <div class="drawer-body">
-    <ul class="cart-list" id="cartList"></ul>
-    <p class="cart-empty" id="cartEmpty">No items yet — add something from the shop.</p>
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
 
-    <div class="cart-total-row" id="cartTotalRow" hidden>
-      <span>Total</span>
-      <span class="cart-total" id="cartTotal">$0</span>
-    </div>
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--court-green);
+  margin: 0 0 0.8em;
+  letter-spacing: 0.02em;
+}
 
-    <div class="payment-choice" id="paymentChoice" hidden>
-      <p class="field-label">Payment method</p>
-      <label><input type="radio" name="payMethod" value="payid" checked> PayID transfer</label>
-      <label><input type="radio" name="payMethod" value="cash"> Cash on pickup</label>
+/* Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(11, 13, 10, 0.9);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
+}
 
-      <div class="payid-inline" id="payidInline">
-        <p class="kicker">Send to</p>
-        <p class="payid-value" id="payidInlineValue">0400 000 000</p>
-      </div>
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
 
-      <p class="field-label">Send order via</p>
-      <div class="send-buttons">
-        <a class="btn btn-primary" id="sendWhatsapp" href="#" target="_blank" rel="noopener">Send via SMS/WhatsApp</a>
-        <a class="btn btn-ghost" id="sendEmail" href="#">Send via email</a>
-      </div>
-    </div>
-  </div>
-</aside>
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  color: var(--charcoal);
+  text-decoration: none;
+}
+.logo svg { color: var(--court-green); }
 
-<script src="app.js"></script>
-</body>
-</html>
+.main-nav { display: flex; gap: 28px; }
+.main-nav a { text-decoration: none; font-size: 0.95rem; color: var(--charcoal); }
+.main-nav a:hover { color: var(--court-green); }
+
+.cart-btn {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  background: transparent;
+  color: var(--charcoal);
+  border: 1px solid var(--line);
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-count {
+  font-family: var(--font-mono);
+  background: var(--court-green);
+  color: var(--bg);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+}
+
+/* Hero */
+.hero { padding: 72px 0 40px; }
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+.lede { font-size: 1.08rem; }
+.hero-actions { display: flex; gap: 14px; margin-top: 8px; flex-wrap: wrap; }
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px 22px;
+  border-radius: var(--radius);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  text-align: center;
+}
+.btn-primary { background: var(--court-green); color: #0B0D0A; }
+.btn-primary:hover { background: #D9FF6B; }
+.btn-ghost { border-color: var(--line); color: var(--charcoal); background: transparent; }
+.btn-ghost:hover { border-color: var(--court-green); color: var(--court-green); }
+
+.hero-art { aspect-ratio: 1 / 1; }
+
+/* Trust strip */
+.trust-strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 28px 0; }
+.trust-inner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.trust-item { display: flex; gap: 12px; align-items: flex-start; }
+.trust-num { font-family: var(--font-mono); color: var(--cork); font-size: 0.9rem; }
+.trust-item p { margin: 0; font-size: 0.92rem; }
+
+/* Shop */
+.shop { padding: 64px 0; }
+.shop-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 16px;
+}
+.shop-head h2 { margin: 0; }
+
+.filters { display: flex; gap: 8px; flex-wrap: wrap; }
+.filter-btn {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  background: transparent;
+  border: 1px solid var(--line);
+  padding: 7px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--ink-soft);
+}
+.filter-btn.active { background: var(--court-green); color: #0B0D0A; border-color: var(--court-green); font-weight: 700; }
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.product-card {
+  background: var(--panel);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.product-icon { width: 100%; height: 90px; }
+.product-icon svg { width: 100%; height: 100%; }
+
+.product-card h3 { margin: 0; }
+.product-spec { font-size: 0.85rem; color: var(--ink-soft); margin: 0; min-height: 2.6em; }
+
+.product-footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.price { font-family: var(--font-mono); font-size: 1.05rem; color: var(--court-green); }
+
+.qty-control {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.qty-control button {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--court-green);
+}
+.qty-control span {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* How it works */
+.how { padding: 48px 0 72px; background: var(--panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.steps { list-style: none; margin: 32px 0 0; padding: 0; display: grid; gap: 28px; }
+.steps li { display: flex; gap: 18px; align-items: flex-start; }
+.step-num {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: #0B0D0A;
+  background: var(--court-green);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.steps h3 { margin-bottom: 4px; }
+.steps p { margin: 0; }
+
+/* Contact */
+.contact { padding: 64px 0; }
+.contact-inner { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: start; }
+.contact-list { margin: 0; }
+.contact-list div { display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); padding: 10px 0; max-width: 420px; }
+.contact-list dt { color: var(--ink-soft); font-size: 0.9rem; }
+.contact-list dd { margin: 0; font-weight: 600; }
+
+.payid-card {
+  background: var(--court-green);
+  color: #0B0D0A;
+  padding: 24px;
+  border-radius: var(--radius);
+}
+.payid-card .kicker { color: #2B3300; }
+.payid-value { font-family: var(--font-mono); font-size: 1.3rem; margin: 0 0 10px; font-weight: 700; }
+.payid-note { color: rgba(11,13,10,0.7); font-size: 0.85rem; margin: 0; }
+
+/* Footer */
+.site-footer { border-top: 1px solid var(--line); padding: 24px 0; }
+.footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.footer-inner p { margin: 0; font-size: 0.85rem; color: var(--ink-soft); }
+.footer-edit-note code { font-family: var(--font-mono); background: var(--line); padding: 2px 6px; border-radius: 2px; }
+
+/* Cart drawer */
+.drawer-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(20, 24, 20, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 30;
+}
+.drawer-backdrop.open { opacity: 1; pointer-events: auto; }
+
+.drawer {
+  position: fixed;
+  top: 0; right: 0;
+  height: 100%;
+  width: min(420px, 92vw);
+  background: var(--bg);
+  z-index: 40;
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -2px 0 0 var(--line);
+}
+.drawer.open { transform: translateX(0); }
+
+.drawer-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--line);
+}
+.drawer-head h2 { margin: 0; font-size: 1.3rem; }
+.drawer-close {
+  background: none; border: none; cursor: pointer;
+  font-size: 1.1rem; color: var(--charcoal);
+}
+
+.drawer-body { padding: 20px 22px; overflow-y: auto; flex: 1; }
+
+.cart-list { list-style: none; padding: 0; margin: 0; }
+.cart-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.92rem;
+}
+.cart-item-name { font-weight: 600; }
+.cart-item-meta { color: var(--ink-soft); font-family: var(--font-mono); font-size: 0.82rem; }
+.cart-item-remove { background: none; border: none; color: var(--accent); cursor: pointer; font-size: 0.8rem; text-decoration: underline; padding: 0; }
+
+.cart-empty { color: var(--ink-soft); font-size: 0.9rem; }
+
+.cart-total-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 16px 0; margin-top: 6px; border-top: 1px solid var(--charcoal);
+  font-weight: 600;
+}
+.cart-total { font-family: var(--font-mono); font-size: 1.2rem; color: var(--court-green); }
+
+.payment-choice { margin-top: 20px; }
+.field-label { font-size: 0.85rem; font-weight: 600; margin: 16px 0 8px; }
+.payment-choice label { display: flex; gap: 8px; align-items: center; font-size: 0.92rem; margin-bottom: 8px; }
+
+.payid-inline { background: var(--panel); border: 1px solid var(--line); padding: 14px; border-radius: var(--radius); margin: 10px 0 6px; }
+.payid-inline .payid-value { color: var(--court-green); font-size: 1.05rem; margin: 0; }
+.payid-inline .kicker { margin-bottom: 4px; }
+
+.send-buttons { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
+.send-buttons .btn { width: 100%; }
+
+@media (max-width: 780px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-art { order: -1; max-width: 280px; margin: 0 auto; }
+  .trust-inner { grid-template-columns: 1fr; }
+  .contact-inner { grid-template-columns: 1fr; }
+  .main-nav { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .drawer, .drawer-backdrop { transition: none; }
+}
+
+:focus-visible {
+  outline: 2px solid var(--court-green);
+  outline-offset: 2px;
+}
