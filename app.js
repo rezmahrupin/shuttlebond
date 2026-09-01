@@ -71,12 +71,12 @@ const CONFIG = {
 /* ============================================================ */
 
 const icons = {
-  shuttle: `<svg viewBox="0 0 100 90"><circle cx="50" cy="66" r="12" fill="#C89B6B"/><path d="M40 58 L20 14 M46 55 L36 10 M54 55 L64 10 M60 58 L80 14" stroke="#2E5C3F" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M20 14 Q50 -2 80 14" stroke="#2E5C3F" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
-  racket: `<svg viewBox="0 0 100 90"><ellipse cx="50" cy="30" rx="26" ry="28" fill="none" stroke="#2E5C3F" stroke-width="2.4"/><path d="M50 58 L50 84" stroke="#C89B6B" stroke-width="5" stroke-linecap="round"/>
-    <path d="M28 30 L72 30 M50 8 L50 52" stroke="#2E5C3F" stroke-width="1" opacity="0.5"/>
-    <path d="M33 14 L67 46 M67 14 L33 46" stroke="#2E5C3F" stroke-width="1" opacity="0.5"/></svg>`,
-  grip: `<svg viewBox="0 0 100 90"><rect x="20" y="34" width="60" height="22" rx="3" fill="none" stroke="#2E5C3F" stroke-width="2.4"/><path d="M28 34 L28 56 M40 34 L40 56 M52 34 L52 56 M64 34 L64 56" stroke="#C89B6B" stroke-width="2"/></svg>`,
-  string: `<svg viewBox="0 0 100 90"><circle cx="50" cy="45" r="30" fill="none" stroke="#2E5C3F" stroke-width="2.4"/><circle cx="50" cy="45" r="6" fill="#C89B6B"/></svg>`
+  shuttle: `<svg viewBox="0 0 100 90"><circle cx="50" cy="66" r="12" fill="#C6FF33"/><path d="M40 58 L20 14 M46 55 L36 10 M54 55 L64 10 M60 58 L80 14" stroke="#7A8570" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M20 14 Q50 -2 80 14" stroke="#7A8570" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
+  racket: `<svg viewBox="0 0 100 90"><ellipse cx="50" cy="30" rx="26" ry="28" fill="none" stroke="#7A8570" stroke-width="2.4"/><path d="M50 58 L50 84" stroke="#C6FF33" stroke-width="5" stroke-linecap="round"/>
+    <path d="M28 30 L72 30 M50 8 L50 52" stroke="#7A8570" stroke-width="1" opacity="0.6"/>
+    <path d="M33 14 L67 46 M67 14 L33 46" stroke="#7A8570" stroke-width="1" opacity="0.6"/></svg>`,
+  grip: `<svg viewBox="0 0 100 90"><rect x="20" y="34" width="60" height="22" rx="3" fill="none" stroke="#7A8570" stroke-width="2.4"/><path d="M28 34 L28 56 M40 34 L40 56 M52 34 L52 56 M64 34 L64 56" stroke="#C6FF33" stroke-width="2"/></svg>`,
+  string: `<svg viewBox="0 0 100 90"><circle cx="50" cy="45" r="30" fill="none" stroke="#7A8570" stroke-width="2.4"/><circle cx="50" cy="45" r="6" fill="#C6FF33"/></svg>`
 };
 
 const money = n => `$${n}`;
