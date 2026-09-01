@@ -16,7 +16,8 @@ const CONFIG = {
       category: "Shuttlecocks",
       spec: "Tube of 12, goose feather, speed 77",
       price: 42,
-      icon: "shuttle"
+      icon: "shuttle",
+      badge: "bestseller"
     },
     {
       id: "shuttle-feather-club",
@@ -40,7 +41,8 @@ const CONFIG = {
       category: "Rackets",
       spec: "Even balance, 3U, medium flex, 85±2g, 675mm",
       price: 79,
-      image: "images/racket-carlton-yellow.png"
+      image: "images/racket-carlton-yellow.png",
+      badge: "bestseller"
     },
     {
       id: "racket-carlton-lavender",
@@ -80,7 +82,8 @@ const CONFIG = {
       category: "Rackets",
       spec: "Includes padded cover bag",
       price: 189,
-      image: "images/racket-yonex-astrox.png"
+      image: "images/racket-yonex-astrox.png",
+      badge: "new"
     },
     {
       id: "racket-lining-halbertec9000",
@@ -88,20 +91,22 @@ const CONFIG = {
       category: "Rackets",
       spec: "Head-heavy power frame",
       price: 249,
-      image: "images/racket-lining-halbertec9000.png"
+      image: "images/racket-lining-halbertec9000.png",
+      badge: "new"
     },
     {
       id: "string-yonex-exbolt63",
       name: "Yonex Exbolt 63",
-      category: "Grips & string",
+      category: "Strings",
       spec: "0.63mm, quick repulsion — per set, strung on request",
       price: 22,
-      image: "images/string-yonex-exbolt63.png"
+      image: "images/string-yonex-exbolt63.png",
+      badge: "bestseller"
     },
     {
       id: "string-yonex-aerobite-boost",
       name: "Yonex Aerobite Boost",
-      category: "Grips & string",
+      category: "Strings",
       spec: "Hybrid control string — per set, strung on request",
       price: 25,
       image: "images/string-yonex-aerobite-boost.png"
@@ -109,7 +114,7 @@ const CONFIG = {
     {
       id: "string-yonex-nanogy95",
       name: "Yonex Nanogy 95",
-      category: "Grips & string",
+      category: "Strings",
       spec: "0.65mm, durable, medium feel — per set",
       price: 20,
       image: "images/string-yonex-nanogy95.png"
@@ -117,7 +122,7 @@ const CONFIG = {
     {
       id: "grip-yonex-towel",
       name: "Yonex Towel Grip",
-      category: "Grips & string",
+      category: "Grips",
       spec: "100% cotton, sweat absorption",
       price: 8,
       image: "images/grip-yonex-towel.png"
@@ -125,7 +130,7 @@ const CONFIG = {
     {
       id: "grip-yonex-yellow",
       name: "Yonex Replacement Grip",
-      category: "Grips & string",
+      category: "Grips",
       spec: "Cushioned, spiral wrap, yellow",
       price: 10,
       image: "images/grip-yonex-yellow-spiral.png"
@@ -133,30 +138,57 @@ const CONFIG = {
     {
       id: "grip-yonex-supergrip",
       name: "Yonex Super Grip",
-      category: "Grips & string",
+      category: "Grips",
       spec: "Synthetic overgrip, pack of 3",
       price: 9,
-      image: "images/grip-yonex-supergrip-orange.png"
+      image: "images/grip-yonex-supergrip-orange.png",
+      badge: "bestseller"
     },
     {
       id: "grip-yonex-overgrip-multi",
       name: "Yonex Overgrip — assorted",
-      category: "Grips & string",
+      category: "Grips",
       spec: "Pack of 5, assorted colours",
       price: 15,
       image: "images/grip-yonex-overgrip-multicolor.png"
+    },
+    {
+      id: "shoes-court-white",
+      name: "Court shoe — White/Navy",
+      category: "Shoes",
+      spec: "Non-marking sole, cushioned midsole",
+      price: 99,
+      icon: "shoe",
+      badge: "new"
+    },
+    {
+      id: "shoes-court-red",
+      name: "Court shoe — Red/Black",
+      category: "Shoes",
+      spec: "Lightweight, reinforced toe guard",
+      price: 109,
+      icon: "shoe"
     }
   ]
 };
 /* ============================================================ */
 
+const CATEGORY_ICONS = {
+  Rackets: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="7" rx="6" ry="6.5"/><path d="M12 13.5V21"/><path d="M8 7h8M12 1v12"/></svg>`,
+  Shuttlecocks: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="17" r="3"/><path d="M9 14 5 4M11 13 9 3M13 13 15 3M15 14 19 4"/><path d="M5 4Q12 -1 19 4"/></svg>`,
+  Strings: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3v18M6 6l12 12M18 6 6 18"/></svg>`,
+  Grips: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="9" width="16" height="6" rx="2"/><path d="M8 9v6M12 9v6M16 9v6"/></svg>`,
+  Shoes: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17c0-2 1-3 3-4l4-2 3 1 4-1 3 2v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Z"/><path d="M10 11V6"/></svg>`
+};
+
 const icons = {
-  shuttle: `<svg viewBox="0 0 100 90"><circle cx="50" cy="66" r="12" fill="#C6FF33"/><path d="M40 58 L20 14 M46 55 L36 10 M54 55 L64 10 M60 58 L80 14" stroke="#7A8570" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M20 14 Q50 -2 80 14" stroke="#7A8570" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
-  racket: `<svg viewBox="0 0 100 90"><ellipse cx="50" cy="30" rx="26" ry="28" fill="none" stroke="#7A8570" stroke-width="2.4"/><path d="M50 58 L50 84" stroke="#C6FF33" stroke-width="5" stroke-linecap="round"/>
-    <path d="M28 30 L72 30 M50 8 L50 52" stroke="#7A8570" stroke-width="1" opacity="0.6"/>
-    <path d="M33 14 L67 46 M67 14 L33 46" stroke="#7A8570" stroke-width="1" opacity="0.6"/></svg>`,
-  grip: `<svg viewBox="0 0 100 90"><rect x="20" y="34" width="60" height="22" rx="3" fill="none" stroke="#7A8570" stroke-width="2.4"/><path d="M28 34 L28 56 M40 34 L40 56 M52 34 L52 56 M64 34 L64 56" stroke="#C6FF33" stroke-width="2"/></svg>`,
-  string: `<svg viewBox="0 0 100 90"><circle cx="50" cy="45" r="30" fill="none" stroke="#7A8570" stroke-width="2.4"/><circle cx="50" cy="45" r="6" fill="#C6FF33"/></svg>`
+  shuttle: `<svg viewBox="0 0 100 90"><circle cx="50" cy="66" r="12" fill="#E63946"/><path d="M40 58 L20 14 M46 55 L36 10 M54 55 L64 10 M60 58 L80 14" stroke="#0B2545" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M20 14 Q50 -2 80 14" stroke="#0B2545" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
+  racket: `<svg viewBox="0 0 100 90"><ellipse cx="50" cy="30" rx="26" ry="28" fill="none" stroke="#0B2545" stroke-width="2.4"/><path d="M50 58 L50 84" stroke="#E63946" stroke-width="5" stroke-linecap="round"/>
+    <path d="M28 30 L72 30 M50 8 L50 52" stroke="#0B2545" stroke-width="1" opacity="0.5"/>
+    <path d="M33 14 L67 46 M67 14 L33 46" stroke="#0B2545" stroke-width="1" opacity="0.5"/></svg>`,
+  grip: `<svg viewBox="0 0 100 90"><rect x="20" y="34" width="60" height="22" rx="3" fill="none" stroke="#0B2545" stroke-width="2.4"/><path d="M28 34 L28 56 M40 34 L40 56 M52 34 L52 56 M64 34 L64 56" stroke="#E63946" stroke-width="2"/></svg>`,
+  string: `<svg viewBox="0 0 100 90"><circle cx="50" cy="45" r="30" fill="none" stroke="#0B2545" stroke-width="2.4"/><circle cx="50" cy="45" r="6" fill="#E63946"/></svg>`,
+  shoe: `<svg viewBox="0 0 100 90"><path d="M12 62c0-8 4-12 12-16l16-8 12 4 16-4 12 8v16a4 4 0 0 1-4 4H16a4 4 0 0 1-4-4Z" fill="none" stroke="#0B2545" stroke-width="2.4"/><path d="M40 42V24" stroke="#E63946" stroke-width="2.4" stroke-linecap="round"/></svg>`
 };
 
 const money = n => `$${n}`;
@@ -165,9 +197,60 @@ const money = n => `$${n}`;
 let cart = {}; // id -> qty
 let activeFilter = "All";
 
+/* ---------- category tiles ---------- */
+const catTilesEl = document.getElementById("catTiles");
+
+function renderCategoryTiles() {
+  const cats = [...new Set(CONFIG.products.map(p => p.category))];
+  catTilesEl.innerHTML = cats.map(cat => `
+    <button class="cat-tile" data-cat="${cat}">
+      ${CATEGORY_ICONS[cat] || ""}
+      <span>${cat}</span>
+    </button>
+  `).join("");
+}
+
+catTilesEl.addEventListener("click", e => {
+  const tile = e.target.closest(".cat-tile");
+  if (!tile) return;
+  activeFilter = tile.dataset.cat;
+  renderFilters();
+  renderProducts();
+  document.getElementById("shop").scrollIntoView({ behavior: "smooth" });
+});
+
+/* ---------- product card markup ---------- */
+function productCard(p) {
+  const qty = cart[p.id] || 0;
+  const media = p.image
+    ? `<div class="product-photo"><img src="${p.image}" alt="${p.name}" loading="lazy"></div>`
+    : `<div class="product-icon">${icons[p.icon] || ""}</div>`;
+  const badge = p.badge
+    ? `<span class="product-badge badge-${p.badge}">${p.badge === "new" ? "New" : "Best seller"}</span>`
+    : "";
+  return `
+    <div class="product-card">
+      ${badge}
+      ${media}
+      <p class="product-cat">${p.category}</p>
+      <h3>${p.name}</h3>
+      <p class="product-spec">${p.spec}</p>
+      <div class="product-footer">
+        <span class="price">${money(p.price)}</span>
+        <div class="qty-control">
+          <button data-action="dec" data-id="${p.id}" aria-label="Decrease quantity">–</button>
+          <span data-qty="${p.id}">${qty}</span>
+          <button data-action="inc" data-id="${p.id}" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+    </div>`;
+}
+
 /* ---------- render products ---------- */
 const grid = document.getElementById("productGrid");
 const filtersEl = document.getElementById("filters");
+const newArrivalsGrid = document.getElementById("newArrivalsGrid");
+const bestSellersGrid = document.getElementById("bestSellersGrid");
 
 function categories() {
   return ["All", ...new Set(CONFIG.products.map(p => p.category))];
@@ -181,26 +264,12 @@ function renderFilters() {
 
 function renderProducts() {
   const items = CONFIG.products.filter(p => activeFilter === "All" || p.category === activeFilter);
-  grid.innerHTML = items.map(p => {
-    const qty = cart[p.id] || 0;
-    const media = p.image
-      ? `<div class="product-photo"><img src="${p.image}" alt="${p.name}" loading="lazy"></div>`
-      : `<div class="product-icon">${icons[p.icon] || ""}</div>`;
-    return `
-    <div class="product-card">
-      ${media}
-      <h3>${p.name}</h3>
-      <p class="product-spec">${p.spec}</p>
-      <div class="product-footer">
-        <span class="price">${money(p.price)}</span>
-        <div class="qty-control">
-          <button data-action="dec" data-id="${p.id}" aria-label="Decrease quantity">–</button>
-          <span data-qty="${p.id}">${qty}</span>
-          <button data-action="inc" data-id="${p.id}" aria-label="Increase quantity">+</button>
-        </div>
-      </div>
-    </div>`;
-  }).join("");
+  grid.innerHTML = items.map(productCard).join("");
+}
+
+function renderRails() {
+  newArrivalsGrid.innerHTML = CONFIG.products.filter(p => p.badge === "new").map(productCard).join("");
+  bestSellersGrid.innerHTML = CONFIG.products.filter(p => p.badge === "bestseller").map(productCard).join("");
 }
 
 filtersEl.addEventListener("click", e => {
@@ -211,7 +280,24 @@ filtersEl.addEventListener("click", e => {
   renderProducts();
 });
 
-grid.addEventListener("click", e => {
+document.querySelectorAll(".main-nav a[data-cat]").forEach(link => {
+  link.addEventListener("click", e => {
+    activeFilter = link.dataset.cat;
+    renderFilters();
+    renderProducts();
+  });
+});
+
+document.querySelectorAll(".rail-link[data-scroll]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    activeFilter = "All";
+    renderFilters();
+    renderProducts();
+    document.getElementById(btn.dataset.scroll).scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+function handleQtyClick(e) {
   const btn = e.target.closest("button[data-action]");
   if (!btn) return;
   const id = btn.dataset.id;
@@ -220,8 +306,13 @@ grid.addEventListener("click", e => {
   if (btn.dataset.action === "dec") cart[id] = Math.max(0, cur - 1);
   if (cart[id] === 0) delete cart[id];
   renderProducts();
+  renderRails();
   renderCart();
-});
+}
+
+grid.addEventListener("click", handleQtyClick);
+newArrivalsGrid.addEventListener("click", handleQtyClick);
+bestSellersGrid.addEventListener("click", handleQtyClick);
 
 /* ---------- cart drawer ---------- */
 const cartList = document.getElementById("cartList");
@@ -276,6 +367,7 @@ cartList.addEventListener("click", e => {
   if (!btn) return;
   delete cart[btn.dataset.remove];
   renderProducts();
+  renderRails();
   renderCart();
 });
 
@@ -341,6 +433,8 @@ document.getElementById("payidDisplay").textContent = CONFIG.payid;
 document.getElementById("payidInlineValue").textContent = CONFIG.payid;
 
 /* ---------- init ---------- */
+renderCategoryTiles();
 renderFilters();
 renderProducts();
+renderRails();
 renderCart();
