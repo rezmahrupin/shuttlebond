@@ -18,7 +18,7 @@
 <div class="announce">Local pickup around Perth · Pay by PayID or cash — no card fees</div>
 
 <header class="site-header">
-  <div class="wrap header-top">
+  <div class="wrap header-inner">
     <a href="#top" class="logo">
       <svg width="26" height="26" viewBox="0 0 28 28" fill="none" aria-hidden="true">
         <path d="M14 3 L20 15 L14 25 L8 15 Z" stroke="currentColor" stroke-width="1.6" fill="none"/>
@@ -26,44 +26,19 @@
       </svg>
       Shuttlebond
     </a>
-    <div class="header-contact">
-      <a href="mailto:orders@shuttlebond.com.au" class="header-contact-item">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7L22 6"/></svg>
-        <span id="headerEmail">orders@shuttlebond.com.au</span>
-      </a>
-      <a href="tel:0400000000" class="header-contact-item">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2Z"/></svg>
-        <span id="headerPhone">0400 000 000</span>
-      </a>
-    </div>
-    <div class="header-actions">
-      <button class="icon-btn" id="searchToggle" aria-label="Search products" aria-expanded="false">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-      </button>
-      <button class="icon-btn cart-btn" id="cartToggle" aria-haspopup="dialog" aria-controls="cartDrawer" aria-label="Open cart">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6h15l-1.5 9h-12Z"/><path d="M6 6 5 3H2"/><circle cx="9.5" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/></svg>
-        <span class="cart-count" id="cartCount">0</span>
-      </button>
-    </div>
+    <nav class="main-nav">
+      <a href="#shop" data-cat="Rackets">Rackets</a>
+      <a href="#shop" data-cat="Shuttlecocks">Shuttlecocks</a>
+      <a href="#shop" data-cat="Strings">Strings</a>
+      <a href="#shop" data-cat="Grips">Grips</a>
+      <a href="#shop" data-cat="Shoes">Shoes</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="cart-btn" id="cartToggle" aria-haspopup="dialog" aria-controls="cartDrawer">
+      Cart
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
   </div>
-
-  <div class="search-bar" id="searchBar" hidden>
-    <div class="wrap search-bar-inner">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-      <input type="text" id="searchInput" placeholder="Search rackets, shuttlecocks, strings…" autocomplete="off">
-      <button id="searchClose" aria-label="Close search">✕</button>
-    </div>
-  </div>
-
-  <nav class="main-nav">
-    <div class="wrap main-nav-inner">
-      <a href="#top">Home</a>
-      <a href="#about">About Shuttlebond</a>
-      <a href="#shop">Shuttlebond Store</a>
-      <a href="#customer-service">Customer Service</a>
-      <a href="#contact">Contact Us</a>
-    </div>
-  </nav>
 </header>
 
 <main id="top">
@@ -94,23 +69,6 @@
             <path d="M -42 -68 Q 0 -92 42 -68" stroke="#0B2545" stroke-width="2.6" fill="none" stroke-linecap="round"/>
           </g>
         </svg>
-      </div>
-    </div>
-  </section>
-
-  <section class="about" id="about">
-    <div class="wrap about-inner">
-      <div class="about-art" aria-hidden="true">
-        <svg viewBox="0 0 200 200" width="100%" height="100%">
-          <circle cx="100" cy="100" r="90" fill="#F1F4FB"/>
-          <path d="M60 60 L140 140 M140 60 L60 140" stroke="#0B2545" stroke-width="2" opacity="0.4"/>
-          <circle cx="100" cy="100" r="40" fill="none" stroke="#E63946" stroke-width="3"/>
-        </svg>
-      </div>
-      <div>
-        <p class="eyebrow">About us</p>
-        <h2>Run by players, for players</h2>
-        <p>Shuttlebond is a Perth-based badminton shop stocking genuine gear from Yonex, Carlton and Li-Ning — rackets, shuttlecocks, strings, grips and shoes. No storefront overhead, no card fees: order online, pay by PayID or cash, and pick up locally around Perth.</p>
       </div>
     </div>
   </section>
@@ -174,9 +132,8 @@
     </div>
   </section>
 
-  <section class="how" id="customer-service">
+  <section class="how" id="how">
     <div class="wrap">
-      <p class="eyebrow">Customer service</p>
       <h2>How ordering works</h2>
       <ol class="steps">
         <li>
