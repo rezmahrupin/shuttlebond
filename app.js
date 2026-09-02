@@ -536,47 +536,7 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer(
 /* ---------- fill in contact/PayID placeholders ---------- */
 document.getElementById("contactPhone").textContent = CONFIG.phone;
 document.getElementById("contactEmail").textContent = CONFIG.email;
-document.getElementById("headerPhone").textContent = CONFIG.phone;
-document.getElementById("headerEmail").textContent = CONFIG.email;
 document.getElementById("payidDisplay").textContent = CONFIG.payid;
-
-/* ---------- header search ---------- */
-const searchToggle = document.getElementById("searchToggle");
-const searchBar = document.getElementById("searchBar");
-const searchInput = document.getElementById("searchInput");
-const searchClose = document.getElementById("searchClose");
-let searchTerm = "";
-
-function openSearch() {
-  searchBar.hidden = false;
-  searchToggle.setAttribute("aria-expanded", "true");
-  searchInput.focus();
-}
-function closeSearch() {
-  searchBar.hidden = true;
-  searchToggle.setAttribute("aria-expanded", "false");
-  searchTerm = "";
-  searchInput.value = "";
-  renderProducts();
-}
-
-searchToggle.addEventListener("click", () => {
-  if (searchBar.hidden) openSearch(); else closeSearch();
-});
-searchClose.addEventListener("click", closeSearch);
-
-searchInput.addEventListener("input", () => {
-  searchTerm = searchInput.value.trim().toLowerCase();
-  const items = searchTerm
-    ? CONFIG.products.filter(p => p.name.toLowerCase().includes(searchTerm) || p.category.toLowerCase().includes(searchTerm))
-    : CONFIG.products.filter(p => activeFilter === "All" || p.category === activeFilter);
-  grid.innerHTML = items.map(productCard).join("");
-  if (searchTerm) document.getElementById("shop").scrollIntoView({ behavior: "smooth" });
-});
-
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape" && !searchBar.hidden) closeSearch();
-});
 document.getElementById("payidInlineValue").textContent = CONFIG.payid;
 
 /* ---------- init ---------- */
