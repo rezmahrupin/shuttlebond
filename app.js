@@ -81,6 +81,7 @@ const CONFIG = {
       name: "Yonex Astrox + racket bag",
       category: "Rackets",
       spec: "Includes padded cover bag",
+      description: "A control-oriented Astrox frame built for players who want fast redirection at the net without giving up smash power. Comes complete with a padded single-racket cover bag, so it's ready to go straight from pickup. Genuine Yonex stock, restrung on request before collection.",
       price: 189,
       image: "images/racket-yonex-astrox.png",
       badge: "new"
@@ -90,6 +91,7 @@ const CONFIG = {
       name: "Li-Ning Halbertec 9000 Power",
       category: "Rackets",
       spec: "Head-heavy power frame",
+      description: "Li-Ning's power-focused Halbertec build, weighted toward the head for players who want maximum smash pace and are comfortable trading a little manoeuvrability for it. Best suited to intermediate–advanced singles or doubles attackers with an established swing.",
       price: 249,
       image: "images/racket-lining-halbertec9000.png",
       badge: "new"
@@ -99,6 +101,7 @@ const CONFIG = {
       name: "Yonex Exbolt 63",
       category: "Strings",
       spec: "0.63mm, quick repulsion — per set, strung on request",
+      description: "A thin, high-repulsion string that gives noticeably more shuttle speed off the strings without sacrificing much control — a favourite among club and tournament players who smash often. Strung fresh to your preferred tension before pickup.",
       price: 22,
       image: "images/string-yonex-exbolt63.png",
       badge: "bestseller"
@@ -226,8 +229,13 @@ function productImages(p) {
   return [];
 }
 
+let selectedQty = {}; // id -> qty chosen before adding to cart (not yet in cart)
+
+function getSelected(id) {
+  return selectedQty[id] || 1;
+}
+
 function productCard(p) {
-  const qty = cart[p.id] || 0;
   const imgs = productImages(p);
   const media = imgs.length
     ? `<div class="product-photo"><img src="${imgs[0]}" alt="${p.name}" loading="lazy"></div>`
@@ -244,10 +252,13 @@ function productCard(p) {
       <p class="product-spec">${p.spec}</p>
       <div class="product-footer">
         <span class="price">${money(p.price)}</span>
-        <div class="qty-control">
-          <button data-action="dec" data-id="${p.id}" aria-label="Decrease quantity">–</button>
-          <span data-qty="${p.id}">${qty}</span>
-          <button data-action="inc" data-id="${p.id}" aria-label="Increase quantity">+</button>
+        <div class="footer-actions">
+          <div class="qty-control">
+            <button data-role="qty" data-action="dec" data-id="${p.id}" aria-label="Decrease quantity">–</button>
+            <span data-qty="${p.id}">${getSelected(p.id)}</span>
+            <button data-role="qty" data-action="inc" data-id="${p.id}" aria-label="Increase quantity">+</button>
+          </div>
+          <button class="btn-add-cart" data-role="add" data-id="${p.id}">Add to cart</button>
         </div>
       </div>
     </div>`;
@@ -304,30 +315,52 @@ document.querySelectorAll(".rail-link[data-scroll]").forEach(btn => {
   });
 });
 
-function handleQtyClick(e) {
-  const btn = e.target.closest("button[data-action]");
+function handleQtySelect(e) {
+  const btn = e.target.closest('button[data-role="qty"]');
   if (!btn) return;
   e.stopPropagation();
   const id = btn.dataset.id;
-  const cur = cart[id] || 0;
-  if (btn.dataset.action === "inc") cart[id] = cur + 1;
-  if (btn.dataset.action === "dec") cart[id] = Math.max(0, cur - 1);
-  if (cart[id] === 0) delete cart[id];
-  renderProducts();
-  renderRails();
+  const cur = getSelected(id);
+  if (btn.dataset.action === "inc") selectedQty[id] = cur + 1;
+  if (btn.dataset.action === "dec") selectedQty[id] = Math.max(1, cur - 1);
+  const span = e.currentTarget.querySelector(`span[data-qty="${id}"]`);
+  if (span) span.textContent = getSelected(id);
+}
+
+function handleAddToCart(e) {
+  const btn = e.target.closest('button[data-role="add"]');
+  if (!btn) return;
+  e.stopPropagation();
+  const id = btn.dataset.id;
+  const qtyToAdd = getSelected(id);
+  cart[id] = (cart[id] || 0) + qtyToAdd;
+  selectedQty[id] = 1;
   renderCart();
+  const span = e.currentTarget.querySelector(`span[data-qty="${id}"]`);
+  if (span) span.textContent = getSelected(id);
+
+  const originalText = btn.textContent;
+  btn.textContent = "Added ✓";
+  btn.classList.add("added");
+  setTimeout(() => {
+    btn.textContent = originalText;
+    btn.classList.remove("added");
+  }, 1200);
 }
 
 function handleCardOpen(e) {
-  if (e.target.closest("button[data-action]")) return;
+  if (e.target.closest("button")) return;
   const card = e.target.closest(".product-card[data-open]");
   if (!card) return;
   openProductModal(card.dataset.open);
 }
 
-grid.addEventListener("click", handleQtyClick);
-newArrivalsGrid.addEventListener("click", handleQtyClick);
-bestSellersGrid.addEventListener("click", handleQtyClick);
+grid.addEventListener("click", handleQtySelect);
+newArrivalsGrid.addEventListener("click", handleQtySelect);
+bestSellersGrid.addEventListener("click", handleQtySelect);
+grid.addEventListener("click", handleAddToCart);
+newArrivalsGrid.addEventListener("click", handleAddToCart);
+bestSellersGrid.addEventListener("click", handleAddToCart);
 grid.addEventListener("click", handleCardOpen);
 newArrivalsGrid.addEventListener("click", handleCardOpen);
 bestSellersGrid.addEventListener("click", handleCardOpen);
@@ -372,7 +405,7 @@ function openProductModal(id) {
   modalName.textContent = product.name;
   modalPrice.textContent = money(product.price);
   modalDesc.textContent = product.description || product.spec;
-  modalQty.textContent = cart[id] || 0;
+  modalQty.textContent = getSelected(id);
 
   productModal.classList.add("open");
   modalBackdrop.classList.add("open");
@@ -398,23 +431,25 @@ modalThumbs.addEventListener("click", e => {
 modalQtyControl.addEventListener("click", e => {
   const btn = e.target.closest("button[data-action]");
   if (!btn || !modalProductId) return;
-  const cur = cart[modalProductId] || 0;
-  if (btn.dataset.action === "inc") cart[modalProductId] = cur + 1;
-  if (btn.dataset.action === "dec") cart[modalProductId] = Math.max(0, cur - 1);
-  if (cart[modalProductId] === 0) delete cart[modalProductId];
-  modalQty.textContent = cart[modalProductId] || 0;
-  renderProducts();
-  renderRails();
-  renderCart();
+  const cur = getSelected(modalProductId);
+  if (btn.dataset.action === "inc") selectedQty[modalProductId] = cur + 1;
+  if (btn.dataset.action === "dec") selectedQty[modalProductId] = Math.max(1, cur - 1);
+  modalQty.textContent = getSelected(modalProductId);
 });
 
 modalAddBtn.addEventListener("click", () => {
   if (!modalProductId) return;
-  cart[modalProductId] = (cart[modalProductId] || 0) + 1;
-  modalQty.textContent = cart[modalProductId];
+  const qtyToAdd = getSelected(modalProductId);
+  cart[modalProductId] = (cart[modalProductId] || 0) + qtyToAdd;
+  selectedQty[modalProductId] = 1;
+  modalQty.textContent = getSelected(modalProductId);
   renderProducts();
   renderRails();
   renderCart();
+
+  const originalText = modalAddBtn.textContent;
+  modalAddBtn.textContent = "Added ✓";
+  setTimeout(() => { modalAddBtn.textContent = originalText; }, 1200);
 });
 
 modalClose.addEventListener("click", closeProductModal);
