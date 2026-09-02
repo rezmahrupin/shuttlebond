@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shuttlebond — Badminton gear, Perth</title>
 <meta name="description" content="Rackets, shuttlecocks, strings, grips and shoes. Order online, pay by PayID or cash on pickup.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="alternate icon" href="favicon.svg">
+<!-- Google Search Console verification: replace CONTENT_GOES_HERE with the code Google gives you, then uncomment this line -->
+<!-- <meta name="google-site-verification" content="CONTENT_GOES_HERE"> --><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -185,6 +188,32 @@
     <p class="footer-edit-note">Edit shop details in <code>app.js</code> → CONFIG.</p>
   </div>
 </footer>
+
+<!-- Product detail modal -->
+<div class="modal-backdrop" id="modalBackdrop"></div>
+<div class="product-modal" id="productModal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Product details">
+  <button class="modal-close" id="modalClose" aria-label="Close product details">✕</button>
+  <div class="modal-body">
+    <div class="modal-gallery">
+      <div class="modal-main-photo" id="modalMainPhoto"></div>
+      <div class="modal-thumbs" id="modalThumbs"></div>
+    </div>
+    <div class="modal-info">
+      <p class="product-cat" id="modalCat"></p>
+      <h2 id="modalName"></h2>
+      <p class="modal-price" id="modalPrice"></p>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-footer">
+        <div class="qty-control" id="modalQtyControl">
+          <button data-action="dec" aria-label="Decrease quantity">–</button>
+          <span id="modalQty">0</span>
+          <button data-action="inc" aria-label="Increase quantity">+</button>
+        </div>
+        <button class="btn btn-primary" id="modalAddBtn">Add to cart</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Cart drawer -->
 <div class="drawer-backdrop" id="drawerBackdrop"></div>
