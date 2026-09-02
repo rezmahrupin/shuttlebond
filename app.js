@@ -220,16 +220,23 @@ catTilesEl.addEventListener("click", e => {
 });
 
 /* ---------- product card markup ---------- */
+function productImages(p) {
+  if (p.images) return p.images;
+  if (p.image) return [p.image];
+  return [];
+}
+
 function productCard(p) {
   const qty = cart[p.id] || 0;
-  const media = p.image
-    ? `<div class="product-photo"><img src="${p.image}" alt="${p.name}" loading="lazy"></div>`
+  const imgs = productImages(p);
+  const media = imgs.length
+    ? `<div class="product-photo"><img src="${imgs[0]}" alt="${p.name}" loading="lazy"></div>`
     : `<div class="product-icon">${icons[p.icon] || ""}</div>`;
   const badge = p.badge
     ? `<span class="product-badge badge-${p.badge}">${p.badge === "new" ? "New" : "Best seller"}</span>`
     : "";
   return `
-    <div class="product-card">
+    <div class="product-card" data-open="${p.id}">
       ${badge}
       ${media}
       <p class="product-cat">${p.category}</p>
@@ -300,6 +307,7 @@ document.querySelectorAll(".rail-link[data-scroll]").forEach(btn => {
 function handleQtyClick(e) {
   const btn = e.target.closest("button[data-action]");
   if (!btn) return;
+  e.stopPropagation();
   const id = btn.dataset.id;
   const cur = cart[id] || 0;
   if (btn.dataset.action === "inc") cart[id] = cur + 1;
@@ -310,9 +318,108 @@ function handleQtyClick(e) {
   renderCart();
 }
 
+function handleCardOpen(e) {
+  if (e.target.closest("button[data-action]")) return;
+  const card = e.target.closest(".product-card[data-open]");
+  if (!card) return;
+  openProductModal(card.dataset.open);
+}
+
 grid.addEventListener("click", handleQtyClick);
 newArrivalsGrid.addEventListener("click", handleQtyClick);
 bestSellersGrid.addEventListener("click", handleQtyClick);
+grid.addEventListener("click", handleCardOpen);
+newArrivalsGrid.addEventListener("click", handleCardOpen);
+bestSellersGrid.addEventListener("click", handleCardOpen);
+
+/* ---------- product detail modal ---------- */
+const productModal = document.getElementById("productModal");
+const modalBackdrop = document.getElementById("modalBackdrop");
+const modalClose = document.getElementById("modalClose");
+const modalMainPhoto = document.getElementById("modalMainPhoto");
+const modalThumbs = document.getElementById("modalThumbs");
+const modalCat = document.getElementById("modalCat");
+const modalName = document.getElementById("modalName");
+const modalPrice = document.getElementById("modalPrice");
+const modalDesc = document.getElementById("modalDesc");
+const modalQty = document.getElementById("modalQty");
+const modalQtyControl = document.getElementById("modalQtyControl");
+const modalAddBtn = document.getElementById("modalAddBtn");
+
+let modalProductId = null;
+
+function setModalMainImage(product, src) {
+  if (src) {
+    modalMainPhoto.innerHTML = `<img src="${src}" alt="${product.name}">`;
+  } else {
+    modalMainPhoto.innerHTML = icons[product.icon] || "";
+  }
+}
+
+function openProductModal(id) {
+  const product = CONFIG.products.find(p => p.id === id);
+  if (!product) return;
+  modalProductId = id;
+
+  const imgs = productImages(product);
+  setModalMainImage(product, imgs[0]);
+
+  modalThumbs.innerHTML = imgs.length > 1
+    ? imgs.map((src, i) => `<button class="modal-thumb ${i === 0 ? "active" : ""}" data-src="${src}"><img src="${src}" alt=""></button>`).join("")
+    : "";
+
+  modalCat.textContent = product.category;
+  modalName.textContent = product.name;
+  modalPrice.textContent = money(product.price);
+  modalDesc.textContent = product.description || product.spec;
+  modalQty.textContent = cart[id] || 0;
+
+  productModal.classList.add("open");
+  modalBackdrop.classList.add("open");
+  productModal.setAttribute("aria-hidden", "false");
+}
+
+function closeProductModal() {
+  productModal.classList.remove("open");
+  modalBackdrop.classList.remove("open");
+  productModal.setAttribute("aria-hidden", "true");
+  modalProductId = null;
+}
+
+modalThumbs.addEventListener("click", e => {
+  const thumb = e.target.closest(".modal-thumb");
+  if (!thumb) return;
+  const product = CONFIG.products.find(p => p.id === modalProductId);
+  setModalMainImage(product, thumb.dataset.src);
+  modalThumbs.querySelectorAll(".modal-thumb").forEach(t => t.classList.remove("active"));
+  thumb.classList.add("active");
+});
+
+modalQtyControl.addEventListener("click", e => {
+  const btn = e.target.closest("button[data-action]");
+  if (!btn || !modalProductId) return;
+  const cur = cart[modalProductId] || 0;
+  if (btn.dataset.action === "inc") cart[modalProductId] = cur + 1;
+  if (btn.dataset.action === "dec") cart[modalProductId] = Math.max(0, cur - 1);
+  if (cart[modalProductId] === 0) delete cart[modalProductId];
+  modalQty.textContent = cart[modalProductId] || 0;
+  renderProducts();
+  renderRails();
+  renderCart();
+});
+
+modalAddBtn.addEventListener("click", () => {
+  if (!modalProductId) return;
+  cart[modalProductId] = (cart[modalProductId] || 0) + 1;
+  modalQty.textContent = cart[modalProductId];
+  renderProducts();
+  renderRails();
+  renderCart();
+});
+
+modalClose.addEventListener("click", closeProductModal);
+modalBackdrop.addEventListener("click", closeProductModal);
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeProductModal(); });
 
 /* ---------- cart drawer ---------- */
 const cartList = document.getElementById("cartList");
