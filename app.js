@@ -15,6 +15,7 @@ const CONFIG = {
       name: "Feather shuttlecocks — Tournament",
       category: "Shuttlecocks",
       spec: "Tube of 12, goose feather, speed 77",
+      description: "Our top-tier tube for match play — goose feather skirt for a true, consistent flight and durable enough to last a full competitive game. Speed 77 suits most indoor courts at sea level.",
       price: 42,
       icon: "shuttle",
       badge: "bestseller"
@@ -24,6 +25,7 @@ const CONFIG = {
       name: "Feather shuttlecocks — Club",
       category: "Shuttlecocks",
       spec: "Tube of 12, duck feather, speed 76",
+      description: "A reliable, everyday feather shuttle for weeknight club sessions. Duck feather keeps the price down while still giving a proper feather-flight feel over nylon alternatives.",
       price: 32,
       icon: "shuttle"
     },
@@ -32,14 +34,44 @@ const CONFIG = {
       name: "Nylon shuttlecocks",
       category: "Shuttlecocks",
       spec: "Tube of 6, durable nylon skirt, all levels",
+      description: "The toughest option in the range — a nylon skirt that shrugs off mishits and rough courts, so it's ideal for backyard games, beginners, or anyone who goes through shuttles fast.",
       price: 18,
       icon: "shuttle"
+    },
+    {
+      id: "shuttle-feather-match",
+      name: "Feather shuttlecocks — Match Grade",
+      category: "Shuttlecocks",
+      spec: "Tube of 12, goose feather, speed 78",
+      description: "A slightly faster speed 78 build for cooler venues or higher-altitude courts, where shuttles naturally fly slower. Same tournament-grade goose feather construction as our Tournament tube.",
+      price: 45,
+      icon: "shuttle"
+    },
+    {
+      id: "shuttle-feather-training",
+      name: "Feather shuttlecocks — Training",
+      category: "Shuttlecocks",
+      spec: "Tube of 12, duck feather, speed 75, budget-friendly",
+      description: "Built for repetition drills and coaching sessions where you're going through a lot of shuttles — a lower-cost feather option so practice doesn't get expensive.",
+      price: 28,
+      icon: "shuttle"
+    },
+    {
+      id: "shuttle-hybrid",
+      name: "Hybrid shuttlecocks",
+      category: "Shuttlecocks",
+      spec: "Tube of 6, nylon base with feather-style skirt",
+      description: "A middle ground between feather and nylon — a synthetic skirt shaped to mimic real feather flight, with much better durability. Good value for regular social play.",
+      price: 24,
+      icon: "shuttle",
+      badge: "new"
     },
     {
       id: "racket-carlton-yellow",
       name: "Carlton — Yellow/Black",
       category: "Rackets",
       spec: "Even balance, 3U, medium flex, 85±2g, 675mm",
+      description: "An even-balance frame that suits players who want one racket for both attack and defence. Medium flex gives forgiving power without needing a fast, technical swing.",
       price: 79,
       image: "images/racket-carlton-yellow.png",
       badge: "bestseller"
@@ -49,6 +81,7 @@ const CONFIG = {
       name: "Carlton — Lavender",
       category: "Rackets",
       spec: "Lightweight aero frame, all-round play",
+      description: "A lighter aero-shaped frame built for quick hand speed at the net and fast recovery between shots — a comfortable, all-round pick for social and club players.",
       price: 69,
       image: "images/racket-carlton-lavender.png"
     },
@@ -57,6 +90,7 @@ const CONFIG = {
       name: "Carlton — Graphite/Yellow",
       category: "Rackets",
       spec: "Full graphite aero head, fast swing",
+      description: "Full graphite construction keeps this frame light and stiff, rewarding a faster swing with crisper, more direct shots. A step up for players moving beyond a beginner racket.",
       price: 75,
       image: "images/racket-carlton-graphite.png"
     },
@@ -65,6 +99,7 @@ const CONFIG = {
       name: "All-round racket — White/Blue",
       category: "Rackets",
       spec: "Balanced frame, control-focused",
+      description: "A control-first frame that favours placement over raw power — well suited to doubles players who rely on tight net play and quick redirection.",
       price: 65,
       image: "images/racket-white-blue.png"
     },
@@ -73,6 +108,7 @@ const CONFIG = {
       name: "Attack racket — Maroon",
       category: "Rackets",
       spec: "Head-light, built for fast net play",
+      description: "Head-light weighting makes this frame quick through the air, favouring players who like to intercept at the net and finish points fast rather than trade smashes from the back.",
       price: 59,
       image: "images/racket-maroon-grip.png"
     },
@@ -97,6 +133,33 @@ const CONFIG = {
       badge: "new"
     },
     {
+      id: "racket-allround-speed",
+      name: "All-Round Speed Racket",
+      category: "Rackets",
+      spec: "Even balance, fast frame, all levels",
+      description: "A fast, even-balance frame designed to react quickly at the net while still holding enough weight in the head for a solid clear or smash. A dependable everyday racket.",
+      price: 89,
+      icon: "racket"
+    },
+    {
+      id: "racket-power-attack",
+      name: "Power Attack Racket — Black/Red",
+      category: "Rackets",
+      spec: "Head-heavy, stiff shaft, built for smashing",
+      description: "Built for players who want to hit hard — a head-heavy build paired with a stiffer shaft channels swing speed straight into smash pace, at some cost to net quickness.",
+      price: 99,
+      icon: "racket"
+    },
+    {
+      id: "racket-junior",
+      name: "Junior Racket — Lightweight",
+      category: "Rackets",
+      spec: "Shorter shaft, ultra-light frame, ages 6–12",
+      description: "A properly scaled-down racket for younger players — lighter overall weight and a shorter shaft make it easier to control and swing correctly while their technique develops.",
+      price: 39,
+      icon: "racket"
+    },
+    {
       id: "string-yonex-exbolt63",
       name: "Yonex Exbolt 63",
       category: "Strings",
@@ -111,6 +174,7 @@ const CONFIG = {
       name: "Yonex Aerobite Boost",
       category: "Strings",
       spec: "Hybrid control string — per set, strung on request",
+      description: "A hybrid string setup blending different gauges across the mains and crosses, aimed at players who want extra control on the drop and net shots without losing smash power.",
       price: 25,
       image: "images/string-yonex-aerobite-boost.png"
     },
@@ -119,14 +183,34 @@ const CONFIG = {
       name: "Yonex Nanogy 95",
       category: "Strings",
       spec: "0.65mm, durable, medium feel — per set",
+      description: "A durable, medium-gauge all-rounder that holds tension well over time — a solid default choice if you're not chasing a specific playstyle and just want a string that lasts.",
       price: 20,
       image: "images/string-yonex-nanogy95.png"
+    },
+    {
+      id: "string-durability",
+      name: "Durability String — 0.70mm",
+      category: "Strings",
+      spec: "0.70mm thick gauge, long-lasting — per set",
+      description: "A thicker 0.70mm gauge built to survive frequent, hard-hitting sessions. Trades a little feel for a noticeably longer lifespan between restrings — good value for heavy racket use.",
+      price: 16,
+      icon: "string"
+    },
+    {
+      id: "string-control",
+      name: "Control String — 0.65mm",
+      category: "Strings",
+      spec: "0.65mm, soft repulsion, precision-focused — per set",
+      description: "A softer-feeling string tuned for touch and placement rather than raw power — well suited to doubles players who rely on tight net shots and precise drop shots.",
+      price: 19,
+      icon: "string"
     },
     {
       id: "grip-yonex-towel",
       name: "Yonex Towel Grip",
       category: "Grips",
       spec: "100% cotton, sweat absorption",
+      description: "A soft cotton towel wrap that soaks up sweat fast, keeping your hold secure through long rallies. Popular with players who sweat heavily or play in humid conditions.",
       price: 8,
       image: "images/grip-yonex-towel.png"
     },
@@ -135,6 +219,7 @@ const CONFIG = {
       name: "Yonex Replacement Grip",
       category: "Grips",
       spec: "Cushioned, spiral wrap, yellow",
+      description: "A cushioned base-layer grip that goes directly on the handle, giving a slightly thicker, softer feel than the bare frame. Replace every few months as the padding wears down.",
       price: 10,
       image: "images/grip-yonex-yellow-spiral.png"
     },
@@ -143,6 +228,7 @@ const CONFIG = {
       name: "Yonex Super Grip",
       category: "Grips",
       spec: "Synthetic overgrip, pack of 3",
+      description: "A thin, tacky synthetic overgrip that wraps over your existing grip for extra hold — quick to replace and a favourite for players who like to change grips often.",
       price: 9,
       image: "images/grip-yonex-supergrip-orange.png",
       badge: "bestseller"
@@ -152,14 +238,43 @@ const CONFIG = {
       name: "Yonex Overgrip — assorted",
       category: "Grips",
       spec: "Pack of 5, assorted colours",
+      description: "The same tacky synthetic overgrip in a five-pack of assorted colours, so you've always got a fresh one on hand and can colour-code multiple rackets.",
       price: 15,
       image: "images/grip-yonex-overgrip-multicolor.png"
+    },
+    {
+      id: "grip-cushion-black",
+      name: "Cushioned Replacement Grip — Black",
+      category: "Grips",
+      spec: "Shock-absorbing base grip, black",
+      description: "A denser cushioned base grip aimed at players who feel shock through the handle on off-centre hits — softer impact on the hand during long sessions.",
+      price: 10,
+      icon: "grip"
+    },
+    {
+      id: "grip-towel-blue",
+      name: "Towel Grip — Blue",
+      category: "Grips",
+      spec: "100% cotton, sweat absorption, blue",
+      description: "Same cotton towel construction as our standard towel grip, in blue — soaks up sweat quickly and gives a soft, secure hold through long matches.",
+      price: 8,
+      icon: "grip"
+    },
+    {
+      id: "grip-overgrip-tacky",
+      name: "Tacky Overgrip — 3 pack",
+      category: "Grips",
+      spec: "Extra-tack synthetic overgrip, pack of 3",
+      description: "A stickier overgrip formula for players whose hands sweat mid-match — holds tack for longer than a standard overgrip before it needs replacing.",
+      price: 11,
+      icon: "grip"
     },
     {
       id: "shoes-court-white",
       name: "Court shoe — White/Navy",
       category: "Shoes",
       spec: "Non-marking sole, cushioned midsole",
+      description: "A non-marking court sole that's safe on indoor courts, paired with a cushioned midsole for the repeated lunges and direction changes badminton demands.",
       price: 99,
       icon: "shoe",
       badge: "new"
@@ -169,6 +284,7 @@ const CONFIG = {
       name: "Court shoe — Red/Black",
       category: "Shoes",
       spec: "Lightweight, reinforced toe guard",
+      description: "A lighter build with a reinforced toe guard for players who drag their front foot on lunges — good balance between speed and durability for regular match play.",
       price: 109,
       icon: "shoe"
     }
