@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rezmahrupin.github.io/shuttlebond/sitemap.xml
